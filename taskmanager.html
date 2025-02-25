@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="title">
+        <h1>Task Manager</h1>
+        <button class="darkbutton" onclick="toggleDarkMode()">Toggle Dark Mode</button>   
+    </header>
+    <main class="container">
+        <!-- <input type="text" id="search" placeholder="Search tasks..."> -->
+        <select class="inputForTasks" id="categoryFilter" onchange="filterTasks(this.value)">
+            <option value="all">All Categories</option>
+            <option value="work">Work</option>
+            <option value="personal">Personal</option>
+            <option value="school">School</option>
+        </select>        <br>
+        <input style="margin-top: 10px;" class="inputForTasks" type="text" id="taskInput" placeholder="Enter a task">
+        <input class="inputForTasks" type="date" id="dueDate">
+        <select class="inputForTasks" id="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+        <select class="inputForTasks" id="category">
+            <option value="work">Work</option>
+            <option value="personal">Personal</option>
+            <option value="school">School</option>
+        </select>
+        <input class="inputForTasks" type="text" id="assignTo" placeholder="Assign task to (email)"> <br>
+        <button style="margin-top: 20px;" onclick="addTask()">Add Task</button>
+        <button onclick="sortTasks()">Sort by Priority</button>
+        <button onclick="clearCompleted()">Clear Completed</button>
+        <button onclick="completeAllTasks()">Complete All Tasks</button>
+        <button onclick="clearAllTasks()">Clear All Tasks</button>
+        <button onclick="sortByDueDate()">Sort by Due Date</button>
+        <button onclick="logout()">Logout</button>
+        <ul id="taskList"></ul>
+
+
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
