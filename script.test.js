@@ -1,13 +1,13 @@
-const { addTask, sortTasks, assignTask, deleteTask } = require("./script"); // Adjust path if needed
+const { addTask, sortTasks, assignTask, deleteTask } = require("./script"); 
 
 beforeAll(() => {
-    global.alert = jest.fn(); // Mock window.alert
+    global.alert = jest.fn(); 
 
-    // Mock localStorage
+    
     Object.defineProperty(global, "localStorage", {
         value: {
             setItem: jest.fn(),
-            getItem: jest.fn(() => JSON.stringify([])), // Mock empty task list
+            getItem: jest.fn(() => JSON.stringify([])), 
             clear: jest.fn(),
         },
         writable: true,
@@ -15,7 +15,7 @@ beforeAll(() => {
 });
 
 beforeEach(() => {
-    // Mock required DOM elements
+    
     document.body.innerHTML = `
         <input id="taskInput" value="Test Task"/>
         <input id="dueDate" value="2025-12-31"/>
@@ -28,21 +28,21 @@ beforeEach(() => {
         <input id="assignTo" value="John Doe"/> <!-- Added missing element -->
     `;
 
-    localStorage.setItem.mockClear(); // Reset mock call counts
+    localStorage.setItem.mockClear(); 
     localStorage.getItem.mockClear();
-    alert.mockClear(); // Reset alert calls
+    alert.mockClear(); 
 });
 
 describe("TaskManager Unit Tests", () => {
     test("Successfully adds a task", () => {
         addTask();
-        expect(localStorage.setItem).toHaveBeenCalledTimes(1); // Ensure setItem is called once
+        expect(localStorage.setItem).toHaveBeenCalledTimes(1); 
     });
 
     test("Fails to add a task without a title", () => {
-        document.getElementById("taskInput").value = ""; // Empty title
+        document.getElementById("taskInput").value = ""; 
         addTask();
-        expect(global.alert).toHaveBeenCalledTimes(1); // Ensure alert is called once
+        expect(global.alert).toHaveBeenCalledTimes(1); 
         expect(global.alert).toHaveBeenCalledWith("Task title is required");
     });
 
@@ -56,14 +56,14 @@ describe("TaskManager Unit Tests", () => {
         expect(localStorage.setItem).toHaveBeenCalledWith(
             "tasks",
             expect.stringContaining("high")
-        ); // Ensure "high" priority is stored first
+        ); 
     });
 
     test("Fails to assign task if task ID does not exist", () => {
         const mockTasks = [{ id: 1, title: "Test Task", assignedTo: null }];
         localStorage.getItem.mockReturnValue(JSON.stringify(mockTasks));
         
-        assignTask(999); // Non-existent ID
+        assignTask(999); 
         
         expect(localStorage.setItem).not.toHaveBeenCalled();
     });

@@ -1,10 +1,9 @@
-// auth.test.js
 const auth = require("./auth");
 
 beforeAll(() => {
     delete window.location;
-    window.location = { href: jest.fn() }; // Mock window.location.href
-    global.alert = jest.fn(); // Mock window.alert
+    window.location = { href: jest.fn() }; 
+    global.alert = jest.fn(); 
 });
 
 beforeEach(() => {
@@ -14,7 +13,7 @@ beforeEach(() => {
         <input id="password" value="password123"/>
         <input id="confirmPassword" value="password123"/>
     `;
-    localStorage.clear(); // Reset localStorage before each test
+    localStorage.clear(); 
 });
 
 describe("Authentication Tests", () => {
@@ -53,7 +52,7 @@ describe("Authentication Tests", () => {
         document.getElementById("password").value = "wrongpassword";
         auth.login();
         expect(localStorage.getItem("currentUser")).toBeNull();
-        expect(alert).toHaveBeenCalledWith("Invalid credentials. Please try again."); // Ensure alert is triggered
+        expect(alert).toHaveBeenCalledWith("Invalid credentials. Please try again."); 
     });
 
     test("Logout clears currentUser", () => {
